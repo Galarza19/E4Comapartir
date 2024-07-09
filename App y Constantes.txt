@@ -1,0 +1,133 @@
+public class App {
+
+    public static void main(String[] args) throws Exception {
+        Listas L1 = new Listas(100);
+
+        L1.add(6);
+        L1.add(2);
+        L1.add(9);
+        L1.add(7);
+        L1.add(8);
+
+        //INSERTAR
+        System.out.println(L1);
+        L1.insertarIlesimo(10, 1);
+        System.out.println(L1);
+        L1.insertarPrim(5, 2);
+        System.out.println(L1);
+        L1.insertarUlt(5, 2);
+        System.out.println(L1);
+        L1.insertarPrin(5, 2, 5);
+        System.out.println(L1);
+
+        //ELIMINAR
+        L1.eliminarTodo(5);
+        System.out.println(L1);
+        L1.eliminarPrim(1);
+        System.out.println(L1);
+        L1.eliminarIesimo(3, 1);
+        System.out.println(L1);
+        L1.eliminarExtremos(1);
+        System.out.println(L1);
+        L1.eliminarUnicos();
+        System.out.println(L1);
+
+        //CONSTANTE
+        int[] a = {1, 2, 3, 4, 5};
+
+        System.out.println(diferentes(a));
+        System.out.println(mayor(a));
+        System.out.println(pares(a));
+        System.out.println(cantPares(a));
+        System.out.println(poker(a));
+
+        //ArrayList
+        Array LArr = new Array();
+        LArr.add(2);
+        LArr.add(4);
+        LArr.add(6);
+        LArr.add(8);
+
+        System.out.println("Lista: " + LArr);
+
+        System.out.println(LArr.iguales());
+        System.out.println(LArr.diferentes());
+        System.out.println(LArr.mayorElem());
+        System.out.println(LArr.ordenado());
+        System.out.println(LArr.pares());
+
+
+    }
+
+    //DEPENDENCIAS
+    public static boolean par(int x) {
+        return x % 2 == 0;
+    }
+
+    public static int frecuencia(int a[], int x) {
+        int c = 0;
+        for (int i = 0; i < a.length; i++) {
+            if (a[i] == x) {
+                c = c + 1;
+            }
+        }
+        return c;
+    }
+
+    //Tam Const
+    //1
+    public static boolean diferentes(int a[]) {
+        for (int i = 0; i < a.length; i++) {
+            for (int j = i + 1; j < a.length; j++) {
+                if (a[i] == a[j]) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    //2
+    public static int mayor(int a[]) {
+        int may = a[0];
+        for (int i = 1; i < a.length; i++) {
+            if (may < a[i]) {
+                may = a[i];
+            }
+        }
+        return may;
+    }
+
+    //3
+    public static boolean pares(int a[]) {
+        for (int i = 0; i < a.length; i++) {
+            if (!par(a[i])) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    //4
+    public static int cantPares(int a[]) {
+        int c = 0;
+        for (int i = 0; i < a.length; i++) {
+            if (par(a[i])) {
+                c = c + 1;
+            }
+        }
+        return c;
+    }
+
+    //5
+    public static boolean poker(int a[]) {
+        for (int i = 0; i < a.length; i++) {
+            if (frecuencia(a, a[i]) == a.length - 1) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+}

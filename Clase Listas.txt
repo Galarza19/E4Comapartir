@@ -1,0 +1,172 @@
+public class Listas {
+
+    private int max;
+    private int cantElem;
+    private int elem[];
+
+    public Listas(int max) {
+        this.max = max;
+        this.cantElem = 0;
+        this.elem = new int[max];
+    }
+
+    public Listas() {
+        this.max = 20;
+        this.cantElem = 0;
+        this.elem = new int[this.max];
+    }
+
+    public void add(int x) {
+        this.elem[this.cantElem] = x;
+        this.cantElem++;
+    }
+
+
+    @Override
+    public String toString() {
+        int i = 0;
+        String S1 = "[";
+        while (i < this.cantElem) {
+            S1 = S1 + this.elem[i];
+            if (i < this.cantElem - 1) {
+                S1 = S1 + ", ";
+            }
+            i = i + 1;
+        }
+        S1 = S1 + "]";
+        return S1;
+    }
+
+    //DEPENDENCIAS
+    public void insertar(int el, int pos) {
+        int k = this.cantElem - 1;
+        while (k >= pos) {
+            this.elem[k + 1] = this.elem[k];
+            k = k - 1;
+        }
+        this.elem[pos] = el;
+        this.cantElem++;
+    }
+
+    public void eliminar(int pos) {
+        int k = pos + 1;
+        while (k < this.cantElem) {
+            this.elem[k - 1] = this.elem[k];
+            k = k + 1;
+        }
+        this.cantElem--;
+    }
+
+    public void insertPrimero(int x) {
+        this.insertar(x, 0);
+    }
+
+    public void insetUlt(int x) {
+        this.insertar(x, this.cantElem);
+    }
+
+
+
+    //INSERTAR
+    //1
+    public void insertarIlesimo(int x, int i) {
+        for (int k = this.cantElem - 1; k >= i; k--) {
+            this.elem[k + 1] = this.elem[k];
+        }
+        this.elem[i] = x;
+        this.cantElem++;
+    }
+
+    //2
+    public void insertarPrim(int x, int n) {
+        for (int i = 0; i < n; i++) {
+            this.insertPrimero(x);
+        }
+    }
+
+    //3
+    public void insertarUlt(int x, int n) {
+        for (int i = 0; i < n; i++) {
+            this.insetUlt(x);
+        }
+    }
+
+    //4
+    public void insertarPrin(int x, int n, int i) {
+        for (int c = 0; c < n; c++) {
+            this.insertar(x, i);
+        }
+    }
+
+    //ELIMINAR
+    //1
+    public void eliminarTodo(int x) {
+        int i = 0;
+        while (i < this.cantElem) {
+            if (this.elem[i] == x) {
+                for (int j = i; j < this.cantElem - 1; j++) {
+                    this.elem[j] = this.elem[j + 1];
+                }
+                this.cantElem--;
+            } else {
+                i = i + 1;
+            }
+        }
+    }
+
+    //2
+    public void eliminarPrim(int n) {
+        if (n < 0) {
+        }
+        if (n > this.cantElem) {
+            this.cantElem = 0;
+        } else {
+            for (int i = 0; i < this.cantElem - n; i++) {
+                this.elem[i] = this.elem[i + n];
+            }
+            this.cantElem = this.cantElem - n;
+        }
+    }
+
+    //3
+    public void eliminarIesimo(int i, int n) {
+        if (i + n > this.cantElem) {
+            this.cantElem = i;
+        } else {
+            this.cantElem = this.cantElem - n;
+            for (int j = i; j < this.cantElem; j++) {
+                this.elem[j] = this.elem[j + n];
+            }
+        }
+    }
+
+    //4
+    public void eliminarExtremos(int n) {
+        if (n >= this.cantElem / 2) {
+            this.cantElem = 0;
+        } else {
+            int inicio = n;
+            int fin = this.cantElem - n;
+            this.cantElem -= n * 2;
+            for (int i = inicio; i < fin; i++) {
+                this.elem[i - n] = this.elem[i];
+            }
+        }
+    }
+
+    //5
+    public void eliminarUnicos() {
+        int[] freq = new int[this.cantElem];
+        for (int i = 0; i < this.cantElem; i++) {
+            freq[this.elem[i] % this.cantElem]++;
+        }
+        int j = 0;
+        for (int i = 0; i < this.cantElem; i++) {
+            if (freq[this.elem[i] % this.cantElem] > 1) {
+                this.elem[j++] = this.elem[i];
+            }
+        }
+        this.cantElem = j;
+    }
+
+}

@@ -1,0 +1,88 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class Array {
+
+    private List<Integer> lista;
+
+    public Array() {
+        lista = new ArrayList<>();
+    }
+
+    @Override
+    public String toString() {
+
+        return lista.toString();
+    }
+    public void add(int x) {
+        lista.add(x);
+    }
+
+    public boolean iguales() {
+        if (lista.isEmpty()) {
+            return true;
+        }
+        int first = lista.get(0);
+        for (int i = 1; i < lista.size(); i++) {
+            if (!lista.get(i).equals(first)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean diferentes() {
+        for (int i = 0; i < lista.size() - 1; i++) {
+            for (int j = i + 1; j < lista.size(); j++) {
+                if (lista.get(i).equals(lista.get(j))) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public int mayorElem() {
+        if (lista.isEmpty()) {
+            throw new IllegalStateException("La lista está vacía");
+        }
+        int mayor = lista.get(0);
+        for (int i = 1; i < lista.size(); i++) {
+            if (lista.get(i) > mayor) {
+                mayor = lista.get(i);
+            }
+        }
+        return mayor;
+    }
+
+    public boolean ordenado() {
+        if (lista.size() < 2) {
+            return true;
+        }
+
+        boolean ascendente = true;
+        boolean descendente = true;
+
+        for (int i = 0; i < lista.size() - 1; i++) {
+            if (lista.get(i) > lista.get(i + 1)) {
+                ascendente = false;
+            }
+            if (lista.get(i) < lista.get(i + 1)) {
+                descendente = false;
+            }
+        }
+
+        return ascendente || descendente;
+    }
+
+    public boolean pares() {
+        for (int elem : lista) {
+            if (elem % 2 != 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+
+}
